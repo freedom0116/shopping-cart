@@ -1,0 +1,31 @@
+.players {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+
+.player {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.category {
+    background-color: cornflowerblue;
+}
+
+.player div {
+    display: flex;
+    flex-direction: center;
+    justify-content: center;
+    width: 3rem;
+    padding: 2px;
+}
+
+.player .name{
+    width: 8rem;
+}

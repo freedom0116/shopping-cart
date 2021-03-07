@@ -1,0 +1,56 @@
+{
+    "players": [
+        {
+            "_id": "player1_1",
+            "image": "/images/player1_1.jpg",
+            "name": "林哲瑄",
+            "position": "CF",
+            "BT": "R/R",
+            "figure": "180/90",
+            "Team": "富邦",
+            "G": 73,
+            "PA": 261,
+            "AB": 220,
+            "RBI":268
+        },
+        {
+            "_id": "player1_9",
+            "image": "/images/player1_9.jpg",
+            "name": "林益全",
+            "position": "1B",
+            "BT": "L/R",
+            "figure": "183/83",
+            "Team": "富邦",
+            "G": 73,
+            "PA": 261,
+            "AB": 220,
+            "RBI":268
+        },
+        {
+            "_id": "player1_18",
+            "image": "/images/player1_18.jpg",
+            "name": "郭俊麟",
+            "position": "SP",
+            "BT": "R/R",
+            "figure": "175/76",
+            "Team": "富邦",
+            "G": 73,
+            "PA": 261,
+            "AB": 220,
+            "RBI":268
+        },
+        {
+            "_id": "player1_69",
+            "image": "/images/player1_69.jpg",
+            "name": "張進德",
+            "position": "C",
+            "BT": "L/R",
+            "figure": "179/102",
+            "Team": "富邦",
+            "G": 73,
+            "PA": 261,
+            "AB": 220,
+            "RBI":268
+        }
+    ]
+}
