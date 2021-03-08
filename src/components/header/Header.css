@@ -1,0 +1,18 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: aliceblue;
+    background-color: #2469a1;
+    font-size: 2em;
+    padding: 0.5em 1em;
+}
+
+.link-font {
+    color: white;
+    text-decoration: none;
+}
+
+.cart {
+    font-size: 50px;
+}

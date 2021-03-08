@@ -2,9 +2,21 @@ html{
     box-sizing: border-box;
 }
 
-.header {
-    color: aliceblue;
+.button {
+    padding: 0.4em 0.8em;
+    font-size: 1em;
+    border: none;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    outline: none;
+}
+
+.button.primary {
+    color: white;
     background-color: #2469a1;
-    font-size: 2em;
-    padding: 0.5em;
+}
+
+.button.secondary {
+    color: #2469a1;
+    background-color: white;
 }
