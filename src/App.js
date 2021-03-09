@@ -1,8 +1,7 @@
 import './App.css';
 import Header from './components/header/Header'
-import Products from'./components/products/Products'
+import HomePage from './page/HomePage'
 import Cart from './components/cart/Cart'
-import data from './data.json'
 import { Switch, Route } from 'react-router-dom'
 
 function App() {
@@ -10,9 +9,7 @@ function App() {
     <div className="App">
       <Header />
       <Switch>
-        <Route exact path="/">
-          <Products data={data} />
-        </Route>
+        <Route exact path="/" component={HomePage} />
         <Route path="/cart" component={Cart} />
       </Switch>
 
