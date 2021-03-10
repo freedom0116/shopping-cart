@@ -7,14 +7,15 @@ import alldata from '../data.json';
 
 function HomePage() {
     const [data, setData] = useState({});
+    const [priceOrder, setPriceOrder] = useState("");
+    const [productSize, setProductSize] = useState("ALL")
 
     useEffect(() => {
-        setData(alldata);
         sortProducts("Featured")
     }, []);
 
-    const sortProducts = (sortOrder) => {
-        const sortedProducts = alldata.products.sort((a, b) => {
+    const sorted = (products, sortOrder) => {
+        return products.sort((a, b) => {
             if(sortOrder === "Featured")
                 return a.rating > b.rating ? -1 : 1;
             else if(sortOrder === "LowtoHigh")
@@ -24,14 +25,40 @@ function HomePage() {
             
             return 0;
         });
+    }
 
+    const filtered = (products, filterSize) => {
+        if(filterSize === "ALL")
+            return products;
+            
+        return products.filter(product => {
+            return product.availableSizes.indexOf(filterSize) >= 0;
+        });
+    }
+
+    const sortProducts = (sortOrder) => {
+        let sortedProducts = filtered(alldata.products, productSize);
+        sortedProducts = sorted(sortedProducts, sortOrder);
+
+        setData({ products: sortedProducts });
+    }
+
+    const filterProducts = (filterSize) => {
+        let sortedProducts = filtered(alldata.products, filterSize);
+        sortedProducts = sorted(sortedProducts, priceOrder);
+        
         setData({ products: sortedProducts });
     }
 
     return (
         <main>
             <FilterBar
-                sortProducts={sortProducts} />
+                priceOrder={priceOrder}
+                productSize={productSize}
+                setPriceOrder={setPriceOrder}
+                setProductSize={setProductSize}
+                sortProducts={sortProducts}
+                filterProducts={filterProducts} />
             <Products data={data} />
         </main>
     );

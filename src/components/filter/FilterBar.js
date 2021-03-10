@@ -3,18 +3,16 @@ import React, { useState } from 'react';
 import { FormControl, InputLabel, Select, MenuItem } from '@material-ui/core';
 
 function Bar(props) {
-    const {sortProducts} = props;
-
-    const [priceOrder, setPriceOrder] = useState("");
-    const [productSize, setProductSize] = useState("")
+    // const {priceOrder, setPriceOrder, sortProducts} = props;
 
     const handleSort = (e) => {
-        sortProducts(e);
-        setPriceOrder(e);
+        props.sortProducts(e);
+        props.setPriceOrder(e);
     };
 
     const handlefilter = (e) => {
-        setProductSize(e);
+        props.setProductSize(e);
+        props.filterProducts(e);
     };
     
     return (
@@ -27,7 +25,7 @@ function Bar(props) {
                 <InputLabel id="sorted" >Sorted</InputLabel>
                 <Select
                     labelId="sorted"
-                    value={priceOrder}
+                    value={props.priceOrder}
                     onChange={e => handleSort(e.target.value)}
                 >
                     <MenuItem value="Featured">Featured</MenuItem>
@@ -43,7 +41,7 @@ function Bar(props) {
                 <InputLabel id="filter" >Filter</InputLabel>
                 <Select
                     labelId="filter"
-                    value={productSize}
+                    value={props.productSize}
                     onChange={e => handlefilter(e.target.value)}
                 >
                     <MenuItem value="ALL">ALL</MenuItem>
