@@ -3,15 +3,16 @@ import React, { useState, useEffect } from 'react';
 
 import Products from '../components/products/Products';
 import FilterBar from '../components/filter/FilterBar';
-import alldata from '../data.json';
+import data from '../data.json';
 
-function HomePage() {
-    const [data, setData] = useState({});
+function HomePage(props) {
+    const { products, cartItems, setProducts, setCartItems } = props;
+
     const [priceOrder, setPriceOrder] = useState("");
-    const [productSize, setProductSize] = useState("ALL")
+    const [productSize, setProductSize] = useState("ALL");
 
     useEffect(() => {
-        sortProducts("Featured")
+        sortProducts("Featured");
     }, []);
 
     const sorted = (products, sortOrder) => {
@@ -37,17 +38,35 @@ function HomePage() {
     }
 
     const sortProducts = (sortOrder) => {
-        let sortedProducts = filtered(alldata.products, productSize);
+        let sortedProducts = filtered(data.products, productSize);
         sortedProducts = sorted(sortedProducts, sortOrder);
 
-        setData({ products: sortedProducts });
+        setProducts( sortedProducts );
     }
 
     const filterProducts = (filterSize) => {
-        let sortedProducts = filtered(alldata.products, filterSize);
+        let sortedProducts = filtered(data.products, filterSize);
         sortedProducts = sorted(sortedProducts, priceOrder);
         
-        setData({ products: sortedProducts });
+        setProducts( sortedProducts );
+    }
+
+    const addtoCart = (product) => {
+      let isInCart = false;
+      const updataCart = [...cartItems]
+  
+      updataCart.forEach(item => {
+        if(item._id === product._id){
+          item.count++;
+          isInCart = true;
+        }
+      })
+  
+      if(!isInCart){
+        updataCart.push({ ...product, count: 1 });
+      }
+  
+      setCartItems(updataCart);
     }
 
     return (
@@ -59,7 +78,9 @@ function HomePage() {
                 setProductSize={setProductSize}
                 sortProducts={sortProducts}
                 filterProducts={filterProducts} />
-            <Products data={data} />
+            <Products 
+                products={products}
+                addtoCart={addtoCart} />
         </main>
     );
 }

@@ -1,5 +1,4 @@
 import './FilterBar.css'
-import React, { useState } from 'react';
 import { FormControl, InputLabel, Select, MenuItem } from '@material-ui/core';
 
 function Bar(props) {
