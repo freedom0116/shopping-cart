@@ -1,30 +1,35 @@
-import './Page.css'
+import './HomePage.css'
 import React, { useState, useEffect } from 'react';
 
 import Products from '../components/products/Products';
 import FilterBar from '../components/filter/FilterBar';
-import data from '../data.json';
 
-function HomePage(props) {
-    const { products, cartItems, setProducts, setCartItems } = props;
+import { FETCH_PRODUCTS } from '../graphql';
+import { useQuery, useMutation } from 'react-apollo';
 
+function HomePage(props) {    
+    const { loading, data } = useQuery(FETCH_PRODUCTS);
+
+    const [products, setProducts] = useState([]);
     const [priceOrder, setPriceOrder] = useState("");
     const [productSize, setProductSize] = useState("ALL");
 
     useEffect(() => {
-        sortProducts("Featured");
-    }, []);
+        if(!loading){
+            setProducts(data.products);
+        }
+    }, [data]);
 
     const sorted = (products, sortOrder) => {
-        return products.sort((a, b) => {
+        return products.slice().sort((a, b) => {
             if(sortOrder === "Featured")
                 return a.rating > b.rating ? -1 : 1;
             else if(sortOrder === "LowtoHigh")
                 return a.price < b.price ? -1 : 1;
             else if(sortOrder === "HightoLow")
                 return a.price > b.price ? -1 : 1;
-            
-            return 0;
+            else
+                return 0;
         });
     }
 
@@ -41,36 +46,18 @@ function HomePage(props) {
         let sortedProducts = filtered(data.products, productSize);
         sortedProducts = sorted(sortedProducts, sortOrder);
 
-        setProducts( sortedProducts );
+        setProducts(sortedProducts);
     }
 
     const filterProducts = (filterSize) => {
         let sortedProducts = filtered(data.products, filterSize);
         sortedProducts = sorted(sortedProducts, priceOrder);
         
-        setProducts( sortedProducts );
-    }
-
-    const addtoCart = (product) => {
-      let isInCart = false;
-      const updataCart = [...cartItems]
-  
-      updataCart.forEach(item => {
-        if(item._id === product._id){
-          item.count++;
-          isInCart = true;
-        }
-      })
-  
-      if(!isInCart){
-        updataCart.push({ ...product, count: 1 });
-      }
-  
-      setCartItems(updataCart);
+        setProducts(sortedProducts);
     }
 
     return (
-        <main>
+        <main className="homePage">
             <FilterBar
                 priceOrder={priceOrder}
                 productSize={productSize}
@@ -79,8 +66,7 @@ function HomePage(props) {
                 sortProducts={sortProducts}
                 filterProducts={filterProducts} />
             <Products 
-                products={products}
-                addtoCart={addtoCart} />
+                products={products} />
         </main>
     );
 }

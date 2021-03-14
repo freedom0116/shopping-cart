@@ -1,12 +1,19 @@
 import './Cart.css'
 import '../../App.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { removefromCart, changefromCount } from '../../actions/cartAction';
 
-function cart (props) {
-    const { cartItems, removefromCart } = props;
+function Cart(props) {
+    const cartItems = useSelector(state => state.cartItems);
+    const dispatch = useDispatch();
 
-    // const handleCount = {
-
-    // }
+    const handleCount = (item, count) => {
+        if(count === "10+"){
+            console.log("asd");
+        }else{
+            dispatch(changefromCount(cartItems, item, count));
+        }
+    }
 
     return (
         <div className="cart">
@@ -20,7 +27,11 @@ function cart (props) {
                                 alt={item.title} />
                             <div className="item-right">
                                 <div className="item-title">{item.title}</div>
-                                <select className="item-count" value={item.count}>
+                                <select 
+                                    className="item-count" 
+                                    value={item.count}
+                                    onChange={e => handleCount(item, e.target.value)}
+                                >
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -32,10 +43,10 @@ function cart (props) {
                                     <option value="9">9</option>
                                     <option value="10+">10+</option>
                                 </select>
-                                <div className="item-price">{`$${item.price}`}</div>
+                                <div className="item-price">{`$${(item.price * item.count).toFixed(1)}`}</div>
                                 <button
                                     className="button primary"
-                                    onClick={() => removefromCart(item)}
+                                    onClick={() => dispatch(removefromCart(cartItems, item))}
                                 >
                                     Delete
                                 </button>
@@ -48,4 +59,4 @@ function cart (props) {
     );
 }
 
-export default cart;
+export default Cart;

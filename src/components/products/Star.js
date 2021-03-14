@@ -10,7 +10,7 @@ function productRating({ rating, number }) {
 
     return (
         <div>
-            {(rating < number) ?
+            {(rating <= number) ?
                 <StarBorder style={starStyle} /> : (rating < number + 1) ?
                 <StarHalf style={starStyle} /> : <Star style={starStyle} />
             }

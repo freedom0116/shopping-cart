@@ -1,13 +1,18 @@
 import './Products.css';
 import '../../App.css';
 import Star from './Star';
+import { useDispatch, useSelector } from 'react-redux';
 
-function products(props) {
-    const { products, addtoCart } = props;
+import { addtoCart } from '../../actions/cartAction';
+
+function Products(props) {
+    const { products } = props;
+
+    const cartItems = useSelector(state => state.cartItems);
+    const dispatch = useDispatch();
     
     return (
         <div>
-            <div></div>
         {!products ? 
             <div>Loading...</div> : 
             <ul className="products">
@@ -28,7 +33,7 @@ function products(props) {
                                 <div>{`$${product.price}`}</div>
                                 <button 
                                     className="button primary"
-                                    onClick={() => addtoCart(product)}
+                                    onClick={() => dispatch(addtoCart(cartItems, product))}
                                 >
                                     Add to cart
                                 </button>
@@ -42,4 +47,4 @@ function products(props) {
     );
 }
 
-export default products;
+export default Products;

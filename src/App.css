@@ -20,3 +20,8 @@
     color: #2469a1;
     background-color: white;
 }
+
+.button.alert {
+    color: black;
+    background-color: rgb(255, 193, 22);
+}
