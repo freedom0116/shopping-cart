@@ -4,7 +4,6 @@ import cryptoRandomString from 'crypto-random-string'
 const resolvers = {
     Query: {
         products: async (parent, args, context, info) => {
-            console.log('here')
             return await Product.find();
         }
     },
