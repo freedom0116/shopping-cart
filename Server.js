@@ -3,6 +3,8 @@ import { ApolloServer } from 'apollo-server';
 import mongoose from 'mongoose';
 import resolvers from './server/graphql/Resolvers';
 import typeDefs from './server/graphql/TypeDefs';
+import express from 'express';
+import path from 'path';
 
 
 const startServer = async () => {
@@ -30,5 +32,15 @@ const startServer = async () => {
         console.log(`The server is up on port ${process.env.PORT | 4000}!`)
     })
 }
+
+const port = process.env.PORT || 80;
+const app = express();
+
+app.use(express.static(path.join(__dirname, 'build')));
+app.get('/*', function (req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+
+app.listen(port);
 
 startServer();
