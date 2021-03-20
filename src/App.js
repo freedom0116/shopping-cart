@@ -1,8 +1,9 @@
 import './App.css';
 import React, { useState } from 'react';
 import Header from './components/header/Header'
-import HomePage from './page/HomePage'
-import CartPage from './page/CartPage'
+import HomePage from './page/homePage/HomePage'
+import CartPage from './page/cartPage/CartPage'
+import InfoPage from './page/infoPage/InfoPage'
 import { Switch, Route } from 'react-router-dom'
 
 function App() {
@@ -18,9 +19,9 @@ function App() {
             setProducts={setProducts}
           />
         </Route>
-        <Route path="/cart">
-          <CartPage />
-        </Route>
+        <Route path="/cart" component={CartPage} />
+        <Route path='/infoInput' component={InfoPage}/>
+
       </Switch>
 
     </div>

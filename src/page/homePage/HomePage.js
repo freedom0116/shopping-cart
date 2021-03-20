@@ -1,13 +1,13 @@
 import './HomePage.css'
 import React, { useState, useEffect } from 'react';
 
-import Products from '../components/products/Products';
-import FilterBar from '../components/filter/FilterBar';
+import Products from '../../components/products/Products';
+import FilterBar from '../../components/filter/FilterBar';
 
-import { FETCH_PRODUCTS } from '../graphql';
+import { FETCH_PRODUCTS } from '../../graphql';
 import { useQuery, useMutation } from 'react-apollo';
 
-function HomePage(props) {    
+function HomePage() {    
     const { loading, data } = useQuery(FETCH_PRODUCTS);
 
     const [products, setProducts] = useState([]);

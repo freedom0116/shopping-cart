@@ -1,10 +1,12 @@
 import './CartPage.css'
-import '../App.css'
-import Cart from '../components/cart/Cart';
-import { useDispatch, useSelector } from 'react-redux';
+import '../../App.css'
+import Cart from '../../components/cart/Cart';
+import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
-function CartPage(props) {
+function CartPage() {
     const cartItems = useSelector(state => state.cartItems);
+    const history = useHistory();
 
     const totalPrice = () => {
         let totalPrice = 0;
@@ -15,6 +17,10 @@ function CartPage(props) {
         return totalPrice;
     }
 
+    const handleCheckout = () => {
+        history.push('/infoInput');
+    }
+
     return (
         <main className="cartPage">
             <Cart />
@@ -23,7 +29,11 @@ function CartPage(props) {
                     <div>Total Price</div>
                     <div>{`$${totalPrice().toFixed(1)}`}</div>
                 </div>
-                <button className="button alert">
+                <button 
+                    className="button alert" 
+                    onClick={handleCheckout}
+                    style={{ filter: (cartItems.length === 0) ? 'grayscale(50%)' : '' }}
+                >
                     Proceed to Checkout
                 </button>
             </div>

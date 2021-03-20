@@ -2,6 +2,11 @@
     box-sizing: border-box;
 }
 
+.link-font {
+    color: white;
+    text-decoration: none;
+}
+
 .button {
     padding: 0.4em 0.8em;
     font-size: 1em;

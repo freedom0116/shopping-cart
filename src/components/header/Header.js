@@ -7,13 +7,6 @@ import { useSelector } from 'react-redux';
 function Header() {
     const cartItems = useSelector(state => state.cartItems);
 
-    // const totalItems = () => {
-    //     let num = 0;
-    //     cartItems.foreach(e => {
-    //         totalItems
-    //     })
-    // }
-
     return (
         <div className="header">
             <Link to="/" className="link-font">Shopping Cart</Link>
