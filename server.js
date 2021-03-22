@@ -11,7 +11,6 @@ const resolvers = require('./server/graphql/Resolvers');
 const typeDefs = require('./server/graphql/TypeDefs');
 const express = require('express');
 const path = require('path');
-const { PortraitOutlined } = require('@material-ui/icons');
 
 const startServer = async () => {
     const server = new ApolloServer({
