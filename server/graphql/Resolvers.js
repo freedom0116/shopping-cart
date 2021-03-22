@@ -1,5 +1,8 @@
-import Product from '../schema/Product'
-import cryptoRandomString from 'crypto-random-string'
+// import Product from '../schema/Product'
+// import cryptoRandomString from 'crypto-random-string'
+
+const Product = require('../schema/Product');
+const cryptoRandomString = require('crypto-random-string');
 
 const resolvers = {
     Query: {
@@ -16,4 +19,4 @@ const resolvers = {
     }
 };
 
-export default resolvers;
+module.exports = resolvers;

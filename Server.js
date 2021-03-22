@@ -1,16 +1,16 @@
 require('dotenv-defaults').config();
-import { ApolloServer } from 'apollo-server';
-import mongoose from 'mongoose';
-import resolvers from './server/graphql/Resolvers';
-import typeDefs from './server/graphql/TypeDefs';
-import express from 'express';
-import path from 'path';
-// const { ApolloServer } = require('apollo-server');
-// const mongoose = require('mongoose');
-// const resolvers = require('./server/graphql/Resolvers');
-// const typeDefs = require('./server/graphql/TypeDefs');
-// const express = require('express');
-// const path = require('path');
+// import { ApolloServer } from 'apollo-server';
+// import mongoose from 'mongoose';
+// import resolvers from './server/graphql/Resolvers';
+// import typeDefs from './server/graphql/TypeDefs';
+// import express from 'express';
+// import path from 'path';
+const { ApolloServer } = require('apollo-server');
+const mongoose = require('mongoose');
+const resolvers = require('./server/graphql/Resolvers');
+const typeDefs = require('./server/graphql/TypeDefs');
+const express = require('express');
+const path = require('path');
 
 const startServer = async () => {
     const server = new ApolloServer({
