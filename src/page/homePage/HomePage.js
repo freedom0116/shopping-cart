@@ -15,6 +15,7 @@ function HomePage() {
     const [productSize, setProductSize] = useState("ALL");
 
     useEffect(() => {
+        console.log(data);
         if(!loading){
             setProducts(data.products);
         }
