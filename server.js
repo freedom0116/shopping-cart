@@ -12,31 +12,31 @@ const typeDefs = require('./server/graphql/TypeDefs');
 const express = require('express');
 const path = require('path');
 
-const startServer = async () => {
-    const server = new ApolloServer({
-        resolvers,
-        typeDefs
-    })
+// const startServer = async () => {
+//     const server = new ApolloServer({
+//         resolvers,
+//         typeDefs
+//     })
     
-    if (!process.env.MONGO_URL) {
-        console.error('Missing MONGO_URL!!!')
-        process.exit(1)
-    }
+//     if (!process.env.MONGO_URL) {
+//         console.error('Missing MONGO_URL!!!')
+//         process.exit(1)
+//     }
 
-    await mongoose.connect(process.env.MONGO_URL, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-    })
+//     await mongoose.connect(process.env.MONGO_URL, {
+//         useNewUrlParser: true,
+//         useUnifiedTopology: true
+//     })
 
-    const db = mongoose.connection
+//     const db = mongoose.connection
 
-    db.on('error', error => console.error('connection error', error))
-    db.once('open', () => console.log('Connected to MongoDB'))
+//     db.on('error', error => console.error('connection error', error))
+//     db.once('open', () => console.log('Connected to MongoDB'))
 
-    server.listen({ port: process.env.PORT | 4000 }, () => {
-        console.log(`The server is up on port ${process.env.PORT | 4000}!`)
-    })
-}
+//     server.listen({ port: process.env.PORT || 4000 }, () => {
+//         console.log(`The server is up on port ${process.env.PORT || 4000}!`)
+//     })
+// }
 
 const port = process.env.PORT || 80;
 const app = express();
@@ -46,6 +46,32 @@ app.get('/*', function (req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
-app.listen(port);
+app.listen(port, () => {
+    console.log("serve at http://localhost:80")
+});
 
-startServer();
+const server = new ApolloServer({
+    resolvers,
+    typeDefs
+})
+
+if (!process.env.MONGO_URL) {
+    console.error('Missing MONGO_URL!!!')
+    process.exit(1)
+}
+
+mongoose.connect(process.env.MONGO_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
+
+const db = mongoose.connection
+
+db.on('error', error => console.error('connection error', error))
+db.once('open', () => console.log('Connected to MongoDB'))
+
+server.listen({ port: process.env.PORT || 4000 }, () => {
+    console.log(`The server is up on port ${process.env.PORT || 4000}!`)
+})
+
+// startServer();
